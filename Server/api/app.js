@@ -14,6 +14,19 @@ app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://real-estate-full-stack-platform.onrender.com');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    console.log("Origin:", origin);
+    next();
+  });
+
 app.use("/api/posts", postRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/test", testRoute);

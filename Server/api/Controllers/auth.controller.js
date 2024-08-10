@@ -54,6 +54,7 @@ export const login = async (req, res) => {
     const token = jwt.sign(
       {
         id: user.id,
+        secure:true,
         isAdmin: true,
       },
       process.env.JWT_SECRET_KEY,
